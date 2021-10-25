@@ -21,7 +21,7 @@ function detachVideo(id) {
 
 function resizeRemoteVideo() {
   console.log("--resize--");
-  var top_margin = 40;
+  var top_margin = 160;
   var left_margin = 20;
   var video_margin = 10;
 

@@ -9,6 +9,7 @@
 # Requirement
 
 WebSocket サーバー/クライアント間は socket.io ライブラリを使用しています。
+
 その他に、Web アプリケーション開発のフレームワークとして Express を使用しています。
 
 - express 4.17.1

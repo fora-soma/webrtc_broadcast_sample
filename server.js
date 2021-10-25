@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
     message.from = socket.id;
 
     // get send target
-    var target = message.sendto;
+    var target = message.sendTo;
     if (target && target != BROADCAST_ID) {
       console.log("===== message emit to -->" + target);
       socket.to(target).emit("message", message);

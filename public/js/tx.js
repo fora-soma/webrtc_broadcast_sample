@@ -99,7 +99,7 @@ function isPeerStarted() {
 // create socket
 var socketReady = false;
 var port = 9001;
-var socket = io.connect("http://localhost:" + port + "/"); // ※自分のシグナリングサーバーに合わせて変更してください
+var socket = io.connect(); // ※自分のシグナリングサーバーに合わせて変更してください
 
 // socket: channel connected
 socket
@@ -119,7 +119,7 @@ function onOpened(evt) {
 // socket: accept connection request
 function onMessage(evt) {
   var id = evt.from;
-  var target = evt.sendto;
+  var target = evt.sendTo;
   var conn = getConnection(id);
 
   if (evt.type === "talk_request") {
@@ -234,7 +234,7 @@ function stopVideo() {
   hangUp();
 
   localVideo.src = "";
-  localStream.stop();
+  localStream.getTracks().forEach((track) => track.stop());
   localStream = null;
 }
 
@@ -257,7 +257,7 @@ function prepareNewConnection(id) {
       console.log(evt.candidate);
       sendCandidate({
         type: "candidate",
-        sendto: conn.id,
+        sendTo: conn.id,
         sdpMLineIndex: evt.candidate.sdpMLineIndex,
         sdpMid: evt.candidate.sdpMid,
         candidate: evt.candidate.candidate,
@@ -284,7 +284,7 @@ function sendOffer(id) {
     function (sessionDescription) {
       // in case of success
       conn.peerConnection.setLocalDescription(sessionDescription);
-      sessionDescription.sendto = id;
+      sessionDescription.sendTo = id;
       sendSDP(sessionDescription);
     },
     function () {

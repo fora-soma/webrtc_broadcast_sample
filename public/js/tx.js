@@ -234,7 +234,7 @@ function stopVideo() {
   hangUp();
 
   localVideo.src = "";
-  localStream.stop();
+  localStream.getTracks().forEach((track) => track.stop());
   localStream = null;
 }
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Broadcast Talk</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <h1>Webカメラ映像</h1>
+    <h2>この映像をWebRTCで配信します</h2>
+    <button type="button" onclick="startVideo();">Start video</button>
+    <button type="button" onclick="stopVideo();">Stop video</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" onclick="tellReady();">On Air</button>
+    <br />
+    <div style="position: relative">
+      <video
+        id="local-video"
+        autoplay
+        style="width: 240px; height: 180px; border: 1px solid black"
+      ></video>
+    </div>
+
+    <!---- socket ※自分のシグナリングサーバーに合わせて変更してください------>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/tx.js"></script>
+  </body>
+</html>

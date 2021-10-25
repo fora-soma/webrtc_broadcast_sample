@@ -142,7 +142,7 @@ function onOpened(evt) {
 // socket: accept connection request
 function onMessage(evt) {
   var id = evt.from;
-  var target = evt.sendto;
+  var target = evt.sendTo;
   var conn = getConnection(id);
 
   console.log("onMessage() evt.type=" + evt.type);
@@ -153,7 +153,7 @@ function onMessage(evt) {
     }
 
     if (isConnectPossible()) {
-      socket.emit("message", { type: "talk_request", sendto: id });
+      socket.emit("message", { type: "talk_request", sendTo: id });
     } else {
       console.warn("max connections. so ignore call");
     }
@@ -254,7 +254,7 @@ function prepareNewConnection(id) {
       console.log(evt.candidate);
       sendCandidate({
         type: "candidate",
-        sendto: conn.id,
+        sendTo: conn.id,
         sdpMLineIndex: evt.candidate.sdpMLineIndex,
         sdpMid: evt.candidate.sdpMid,
         candidate: evt.candidate.candidate,
@@ -310,7 +310,7 @@ function sendAnswer(evt) {
     function (sessionDescription) {
       // in case of success
       conn.peerConnection.setLocalDescription(sessionDescription);
-      sessionDescription.sendto = id;
+      sessionDescription.sendTo = id;
       sendSDP(sessionDescription);
     },
     function () {

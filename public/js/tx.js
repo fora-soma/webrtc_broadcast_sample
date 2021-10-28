@@ -106,6 +106,8 @@ socket
   .on("connect", onOpened)
   .on("message", onMessage)
   .on("user disconnected", onUserDisconnect);
+// .on("created", onChannelCreated)
+// .on("joined", onChannelJoined);
 
 function onOpened(evt) {
   console.log("socket opened.");
@@ -114,6 +116,8 @@ function onOpened(evt) {
   var roomName = getRoomName(); // 会議室名を取得する
   socket.emit("enter", roomName);
   console.log("enter to " + roomName);
+
+  startVideo();
 }
 
 // socket: accept connection request
@@ -149,6 +153,18 @@ function onUserDisconnect(evt) {
     stopConnection(evt.id);
   }
 }
+
+// function onChannelCreated(room, clientId) {
+//   console.log("Created room", room, "- my client ID is", clientId);
+//   socket.emit("caster entered", room);
+//   startVideo();
+// }
+
+// function onChannelJoined(room, clientId) {
+//   console.log("This peer has joined room", room, "with client ID", clientId);
+//   socket.emit("caster entered", room);
+//   startVideo();
+// }
 
 function getRoomName() {
   // たとえば、 URLに  ?roomName  とする

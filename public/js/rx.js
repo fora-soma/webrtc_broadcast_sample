@@ -137,6 +137,18 @@ function onOpened(evt) {
   var roomName = getRoomName(); // 会議室名を取得する
   socket.emit("enter", roomName);
   console.log("enter to " + roomName);
+
+  sendRequest();
+}
+
+function sendRequest() {
+  if (isConnectPossible()) {
+    // channel全体にtalk_request(オファーリクエスト)送信
+    // tx.htmlを表示しているpeerのみ反応し、rxのpeerは無視してくれるはず。
+    socket.emit("message", { type: "talk_request" });
+  } else {
+    console.warn("max connections. so ignore call");
+  }
 }
 
 // socket: accept connection request

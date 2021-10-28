@@ -106,8 +106,6 @@ socket
   .on("connect", onOpened)
   .on("message", onMessage)
   .on("user disconnected", onUserDisconnect);
-// .on("created", onChannelCreated)
-// .on("joined", onChannelJoined);
 
 function onOpened(evt) {
   console.log("socket opened.");
